@@ -103,13 +103,13 @@ function CoverLayout({ color, header, title, description, image, top, children }
   );
 }
 
-// Setting default values for the props of CoverLayout
-CoverLayout.defaultProps = {
-  header: "",
-  title: "",
-  description: "",
-  color: "info",
-  top: 20,
+      // Setting default values for the props of CoverLayout
+      CoverLayout.defaultProps = {
+        header: "",
+      title: "",
+      description: "",
+      color: "info",
+      top: 20,
 };
 
 // Typechecking props for the CoverLayout

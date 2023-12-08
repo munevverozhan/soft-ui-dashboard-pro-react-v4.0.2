@@ -40,39 +40,6 @@ import SpaceShip from "examples/Icons/SpaceShip";
 
 const pageRoutes = [
   {
-    name: "Dashboards",
-    key: "dashboards",
-    icon: <Shop size="12px" color="white" />,
-    collapse: [
-      {
-        name: "Default",
-        key: "default",
-        route: "/dashboards/default",
-      },
-      {
-        name: "Automotive",
-        key: "automotive",
-        route: "/dashboards/automotive",
-      },
-      {
-        name: "Smart Home",
-        key: "smart-home",
-        route: "/dashboards/smart-home",
-      },
-      {
-        name: "VR Default",
-        key: "vr-default",
-        route: "/dashboards/virtual-reality/default",
-      },
-      {
-        name: "VR Info",
-        key: "vr-info",
-        route: "/dashboards/virtual-reality/info",
-      },
-      { name: "CRM", key: "crm", route: "/dashboards/crm" },
-    ],
-  },
-  {
     name: "Users",
     key: "users",
     icon: <Office size="12px" color="white" />,
@@ -364,42 +331,6 @@ const pageRoutes = [
         name: "Error 500",
         key: "error-500",
         route: "/authentication/error/500",
-      },
-    ],
-  },
-  {
-    name: "Applications",
-    key: "applications",
-    collapse: [
-      {
-        name: "Kanban",
-        key: "kanban",
-        route: "/applications/kanban",
-        icon: "apps",
-      },
-      {
-        name: "Wizard",
-        key: "wizard",
-        route: "/applications/wizard",
-        icon: "badge",
-      },
-      {
-        name: "Data Tables",
-        key: "data-tables",
-        route: "/applications/data-tables",
-        icon: "table_view",
-      },
-      {
-        name: "Calendar",
-        key: "calendar",
-        route: "/applications/calendar",
-        icon: "today",
-      },
-      {
-        name: "Analytics",
-        key: "analytics",
-        route: "/applications/analytics",
-        icon: "assessment",
       },
     ],
   },

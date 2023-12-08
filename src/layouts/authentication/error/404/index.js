@@ -25,14 +25,10 @@ import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
 // Soft UI Dashboard PRO React base styles
 import typography from "assets/theme/base/typography";
-
-// Soft UI Dashboard PRO React page layout routes
-import pageRoutes from "page.routes";
 
 // Images
 import error404 from "assets/images/illustrations/error-404.png";
@@ -42,16 +38,6 @@ function Error404() {
 
   return (
     <PageLayout white>
-      <DefaultNavbar
-        routes={pageRoutes}
-        transparent
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-pro-react",
-          label: "buy now",
-          color: "dark",
-        }}
-      />
       <SoftBox my={24} height="calc(100vh - 24rem)">
         <Grid
           container

@@ -33,7 +33,6 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftSelect from "components/SoftSelect";
 import SoftInput from "components/SoftInput";
-import SoftPagination from "components/SoftPagination";
 
 // Soft UI Dashboard PRO React example components
 import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
@@ -48,7 +47,7 @@ function DataTable({
   isSorted,
   noEndBorder,
 }) {
-  const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 10;
+  const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 12;
   const entries = entriesPerPage.entries ? entriesPerPage.entries : [5, 10, 15, 20, 25];
   const columns = useMemo(() => table.columns, [table]);
   const data = useMemo(() => table.rows, [table]);
@@ -83,18 +82,6 @@ function DataTable({
 
   // Set the entries per page value based on the select value
   const setEntriesPerPage = ({ value }) => setPageSize(value);
-
-  // Render the paginations
-  const renderPagination = pageOptions.map((option) => (
-    <SoftPagination
-      item
-      key={option}
-      onClick={() => gotoPage(Number(option))}
-      active={pageIndex === option}
-    >
-      {option + 1}
-    </SoftPagination>
-  ));
 
   // Handler for the input to set the pagination index
   const handleInputPagination = ({ target: { value } }) =>
@@ -227,34 +214,7 @@ function DataTable({
             </SoftTypography>
           </SoftBox>
         )}
-        {pageOptions.length > 1 && (
-          <SoftPagination
-            variant={pagination.variant ? pagination.variant : "gradient"}
-            color={pagination.color ? pagination.color : "info"}
-          >
-            {canPreviousPage && (
-              <SoftPagination item onClick={() => previousPage()}>
-                <Icon sx={{ fontWeight: "bold" }}>chevron_left</Icon>
-              </SoftPagination>
-            )}
-            {renderPagination.length > 6 ? (
-              <SoftBox width="5rem" mx={1}>
-                <SoftInput
-                  inputProps={{ type: "number", min: 1, max: customizedPageOptions.length }}
-                  value={customizedPageOptions[pageIndex]}
-                  onChange={(handleInputPagination, handleInputPaginationValue)}
-                />
-              </SoftBox>
-            ) : (
-              renderPagination
-            )}
-            {canNextPage && (
-              <SoftPagination item onClick={() => nextPage()}>
-                <Icon sx={{ fontWeight: "bold" }}>chevron_right</Icon>
-              </SoftPagination>
-            )}
-          </SoftPagination>
-        )}
+        {pageOptions.length > 1}
       </SoftBox>
     </TableContainer>
   );

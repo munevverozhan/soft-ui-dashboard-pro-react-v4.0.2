@@ -30,7 +30,6 @@ import SoftButton from "components/SoftButton";
 // Soft UI Dashboard PRO React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
@@ -89,7 +88,6 @@ function OrderList() {
           <DataTable table={dataTableData} entriesPerPage={false} canSearch />
         </Card>
       </SoftBox>
-      <Footer />
     </DashboardLayout>
   );
 }

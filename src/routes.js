@@ -38,7 +38,6 @@ Coded by www.creative-tim.com
 // Soft UI Dashboard PRO React layouts
 
 import SweetAlerts from "layouts/pages/sweet-alerts";
-import Notifications from "layouts/pages/notifications";
 import OrderList from "layouts/ecommerce/orders/order-list";
 import SignInCover from "layouts/authentication/sign-in/cover";
 import SignUpCover from "layouts/authentication/sign-up/cover";
@@ -68,13 +67,7 @@ const routes = [
         key: "sweet-alerts",
         route: "/pages/sweet-alerts",
         component: <SweetAlerts />,
-      },
-      {
-        name: "Notfications",
-        key: "notifications",
-        route: "/pages/notifications",
-        component: <Notifications />,
-      },
+      }
     ],
   },
   {
@@ -147,26 +140,6 @@ const routes = [
     ],
   },
   { type: "divider", key: "divider-1" },
-
-  {
-    type: "collapse",
-    name: "Basic",
-    key: "basic",
-    icon: <SpaceShip size="12px" />,
-    collapse: [
-      {
-        name: "Foundation",
-        key: "foundation",
-        collapse: [
-          {
-            name: "Routing System",
-            key: "routing-system",
-            href: "https://www.creative-tim.com/learning-lab/react/routing-system/soft-ui-dashboard/",
-          },
-        ],
-      },
-    ],
-  },
   {
     type: "collapse",
     name: "Components",

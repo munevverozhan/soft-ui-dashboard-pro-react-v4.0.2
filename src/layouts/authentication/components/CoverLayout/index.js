@@ -27,9 +27,6 @@ import SoftTypography from "components/SoftTypography";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
-// Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
-
 // Soft UI Dashboard PRO React page layout routes
 import pageRoutes from "page.routes";
 
@@ -98,18 +95,17 @@ function CoverLayout({ color, header, title, description, image, top, children }
           </SoftBox>
         </Grid>
       </Grid>
-      <Footer />
     </PageLayout>
   );
 }
 
-      // Setting default values for the props of CoverLayout
-      CoverLayout.defaultProps = {
-        header: "",
-      title: "",
-      description: "",
-      color: "info",
-      top: 20,
+// Setting default values for the props of CoverLayout
+CoverLayout.defaultProps = {
+  header: "",
+  title: "",
+  description: "",
+  color: "info",
+  top: 20,
 };
 
 // Typechecking props for the CoverLayout

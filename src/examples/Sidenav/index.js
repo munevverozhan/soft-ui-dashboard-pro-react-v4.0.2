@@ -35,7 +35,6 @@ import SoftTypography from "components/SoftTypography";
 import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 import SidenavList from "examples/Sidenav/SidenavList";
 import SidenavItem from "examples/Sidenav/SidenavItem";
-import SidenavCard from "examples/Sidenav/SidenavCard";
 
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
@@ -243,10 +242,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       </SoftBox>
       <Divider />
       <List>{renderRoutes}</List>
-
-      <SoftBox pt={2} my={2} mx={2}>
-        <SidenavCard />
-      </SoftBox>
     </SidenavRoot>
   );
 }

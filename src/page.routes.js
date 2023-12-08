@@ -48,12 +48,7 @@ const pageRoutes = [
         name: "Sweet Alerts",
         key: "sweet-alerts",
         route: "/pages/sweet-alerts",
-      },
-      {
-        name: "Notfications",
-        key: "notifications",
-        route: "/pages/notifications",
-      },
+      }
     ],
   },
   {

@@ -31,9 +31,6 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 // Soft UI Dashboard PRO React base styles
 import typography from "assets/theme/base/typography";
 
-// Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
-
 // Soft UI Dashboard PRO React page layout routes
 import pageRoutes from "page.routes";
 
@@ -93,7 +90,6 @@ function Error404() {
           </Grid>
         </Grid>
       </SoftBox>
-      <Footer />
     </PageLayout>
   );
 }

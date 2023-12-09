@@ -56,20 +56,7 @@ import CreditCard from "examples/Icons/CreditCard";
 
 const routes = [
   { type: "title", title: "Pages", key: "title-pages" },
-  {
-    type: "collapse",
-    name: "Pages",
-    key: "pages",
-    icon: <Office size="12px" />,
-    collapse: [
-      {
-        name: "Sweet Alerts",
-        key: "sweet-alerts",
-        route: "/pages/sweet-alerts",
-        component: <SweetAlerts />,
-      }
-    ],
-  },
+
   {
     type: "collapse",
     name: "Ecommerce",
@@ -114,55 +101,10 @@ const routes = [
             route: "/authentication/sign-up/cover",
             component: <SignUpCover />,
           },
-        ],
-        name: "Error",
-        key: "error",
-        collapse: [
-          {
-            name: "Error 404",
-            key: "error-404",
-            route: "/authentication/error/404",
-            component: <Error404 />,
-          },
-          {
-            name: "Error 500",
-            key: "error-500",
-            route: "/authentication/error/500",
-            component: <Error500 />,
-          },
-        ],
-      },
+        ]
+      }
     ],
-  },
-  { type: "divider", key: "divider-1" },
-  {
-    type: "collapse",
-    name: "Components",
-    key: "components",
-    icon: <CustomerSupport size="12px" />,
-    collapse: [
-      {
-        name: "Alerts",
-        key: "alerts",
-        href: "https://www.creative-tim.com/learning-lab/react/alerts/soft-ui-dashboard/",
-      },
-      {
-        name: "Buttons",
-        key: "buttons",
-        href: "https://www.creative-tim.com/learning-lab/react/buttons/soft-ui-dashboard/",
-      },
-      {
-        name: "Input",
-        key: "input",
-        href: "https://www.creative-tim.com/learning-lab/react/input/soft-ui-dashboard/",
-      },
-      {
-        name: "Select",
-        key: "select",
-        href: "https://www.creative-tim.com/learning-lab/react/select/soft-ui-dashboard/",
-      },
-    ],
-  },
+  }
 ];
 
 export default routes;

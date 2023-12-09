@@ -40,18 +40,6 @@ import SpaceShip from "examples/Icons/SpaceShip";
 
 const pageRoutes = [
   {
-    name: "Extra",
-    key: "extra",
-    icon: <Document size="12px" color="white" />,
-    collapse: [
-      {
-        name: "Sweet Alerts",
-        key: "sweet-alerts",
-        route: "/pages/sweet-alerts",
-      }
-    ],
-  },
-  {
     name: "Orders",
     key: "orders",
     icon: <Document size="12px" color="white" />,
@@ -84,23 +72,7 @@ const pageRoutes = [
         route: "/authentication/sign-up/cover",
       },
     ],
-  },
-  {
-    name: "Error",
-    key: "error",
-    collapse: [
-      {
-        name: "Error 404",
-        key: "error-404",
-        route: "/authentication/error/404",
-      },
-      {
-        name: "Error 500",
-        key: "error-500",
-        route: "/authentication/error/500",
-      },
-    ],
-  },
+  }
 ];
 
 export default pageRoutes;

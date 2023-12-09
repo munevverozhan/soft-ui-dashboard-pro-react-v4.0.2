@@ -59,7 +59,7 @@ const pageRoutes = [
       {
         name: "Order List",
         key: "order-list",
-        route: "/ecommerce/orders/order-list",
+        route: "order-list",
       }
     ],
   },

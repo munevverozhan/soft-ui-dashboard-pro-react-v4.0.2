@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 
 /* eslint-disable react/prop-types */
 // ProductsList page components
-import DefaultCell from "layouts/ecommerce/orders/order-list/components/DefaultCell";
+import DefaultCell from "order-list/components/DefaultCell";
 
 const dataTableData = {
   columns: [

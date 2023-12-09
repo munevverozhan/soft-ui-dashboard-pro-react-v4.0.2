@@ -30,15 +30,16 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 // Soft UI Dashboard PRO React base styles
 import typography from "assets/theme/base/typography";
 
-// Images
-import error404 from "assets/images/illustrations/error-404.png";
 
-function Error404() {
+// Images
+import error500 from "assets/images/illustrations/error-500.png";
+
+function Error500() {
   const { d1, d3, d4, d5 } = typography;
 
   return (
     <PageLayout white>
-      <SoftBox my={24} height="calc(100vh - 24rem)">
+      <SoftBox my={18} height="calc(100vh - 18rem)">
         <Grid
           container
           spacing={3}
@@ -47,31 +48,31 @@ function Error404() {
           sx={{ height: "100%" }}
         >
           <Grid item xs={11} sm={9} container alignItems="center">
-            <Grid item xs={12} lg={6}>
+            <Grid item xs={12} lg={5}>
               <SoftBox
                 fontSize={{ xs: d5.fontSize, sm: d4.fontSize, md: d3.fontSize, lg: d1.fontSize }}
                 lineHeight={1.2}
               >
-                <SoftTypography variant="inherit" color="error" textGradient fontWeight="bold">
-                  Error 404
+                <SoftTypography variant="inherit" color="warning" textGradient fontWeight="bold">
+                  Error 500
                 </SoftTypography>
               </SoftBox>
-              <SoftTypography variant="h2" color="dark" textGradient fontWeight="bold">
-                Erm. Page not found
+              <SoftTypography variant="h2" color="text" fontWeight="bold">
+                Something went wrong
               </SoftTypography>
               <SoftBox mt={1} mb={2}>
-                <SoftTypography variant="body1" color="text">
+                <SoftTypography variant="body1" color="text" opacity={0.6}>
                   We suggest you to go to the homepage while we solve this issue.
                 </SoftTypography>
               </SoftBox>
               <SoftBox mt={4} mb={2}>
-                <SoftButton component={Link} to="/" variant="gradient" color="dark">
+                <SoftButton component={Link} to="/authentication/sign-in/cover" variant="gradient" color="warning">
                   go to homepage
                 </SoftButton>
               </SoftBox>
             </Grid>
-            <Grid item xs={12} lg={6}>
-              <SoftBox component="img" src={error404} alt="error-404" width="100%" />
+            <Grid item xs={12} lg={7}>
+              <SoftBox component="img" src={error500} alt="error-404" width="70%" />
             </Grid>
           </Grid>
         </Grid>
@@ -80,4 +81,4 @@ function Error404() {
   );
 }
 
-export default Error404;
+export default Error500;

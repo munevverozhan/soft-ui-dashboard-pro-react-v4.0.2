@@ -28,7 +28,7 @@ import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
 
 // Authentication layout components
-import CoverLayout from "layouts/authentication/components/CoverLayout";
+import CoverLayout from "authentication/components/CoverLayout";
 
 // Images
 import curved11 from "assets/images/curved-images/curved11.jpg";

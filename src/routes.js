@@ -38,11 +38,11 @@ Coded by www.creative-tim.com
 // Soft UI Dashboard PRO React layouts
 
 import SweetAlerts from "layouts/pages/sweet-alerts";
-import OrderList from "layouts/ecommerce/orders/order-list";
-import SignInCover from "layouts/authentication/sign-in/cover";
-import SignUpCover from "layouts/authentication/sign-up/cover";
-import Error404 from "layouts/authentication/error/404";
-import Error500 from "layouts/authentication/error/500";
+import OrderList from "order-list";
+import SignInCover from "authentication/sign-in/cover";
+import SignUpCover from "authentication/sign-up/cover";
+import Error404 from "authentication/error/404";
+import Error500 from "authentication/error/500";
 
 // Soft UI Dashboard PRO React icons
 import Shop from "examples/Icons/Shop";
@@ -75,21 +75,16 @@ const routes = [
     name: "Ecommerce",
     key: "ecommerce",
     icon: <Basket size="12px" />,
-    collapse: [
 
+    collapse: [
       {
-        name: "Orders",
-        key: "orders",
-        collapse: [
-          {
-            name: "Order List",
-            key: "order-list",
-            route: "/ecommerce/orders/order-list",
-            component: <OrderList />,
-          }
-        ],
+        name: "Order List",
+        key: "order-list",
+        route: "order-list",
+        component: <OrderList />,
       }
     ],
+
   },
   {
     type: "collapse",
@@ -104,7 +99,7 @@ const routes = [
           {
             name: "Cover",
             key: "cover",
-            route: "/authentication/sign-in/cover",
+            route: "authentication/sign-in/cover",
             component: <SignInCover />,
           }
         ],

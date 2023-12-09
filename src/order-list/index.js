@@ -33,7 +33,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import dataTableData from "layouts/ecommerce/orders/order-list/data/dataTableData";
+import dataTableData from "order-list/data/dataTableData";
 
 function OrderList() {
   const [menu, setMenu] = useState(null);

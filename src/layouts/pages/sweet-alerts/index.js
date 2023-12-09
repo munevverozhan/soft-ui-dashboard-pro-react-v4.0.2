@@ -22,7 +22,6 @@ import SoftTypography from "components/SoftTypography";
 
 // Soft UI Dashboard PRO React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 // Sweet Alerts page components
 import Success from "layouts/pages/sweet-alerts/components/Success";
@@ -31,7 +30,6 @@ import WithAttachedFunction from "layouts/pages/sweet-alerts/components/WithAtta
 function SweetAlerts() {
   return (
     <DashboardLayout>
-      <DashboardNavbar />
       <SoftBox mt={3} mb={8}>
         <Grid container justifyContent="center">
           <Grid item xs={12} lg={8}>

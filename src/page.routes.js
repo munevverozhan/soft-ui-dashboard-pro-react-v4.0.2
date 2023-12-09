@@ -58,7 +58,7 @@ const pageRoutes = [
       {
         name: "Cover",
         key: "cover",
-        route: "/authentication/sign-in/cover",
+        route: "/authentication/sign-in",
       }
     ],
   },

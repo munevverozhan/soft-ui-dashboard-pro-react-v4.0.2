@@ -94,7 +94,7 @@ function Cover() {
             Already have an account?&nbsp;
             <SoftTypography
               component={Link}
-              to="/authentication/sign-in/cover"
+              to="/authentication/sign-in"
               variant="button"
               color="info"
               fontWeight="medium"

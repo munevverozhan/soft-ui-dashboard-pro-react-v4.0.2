@@ -39,8 +39,8 @@ Coded by www.creative-tim.com
 
 import SweetAlerts from "layouts/pages/sweet-alerts";
 import OrderList from "order-list";
-import SignInCover from "authentication/sign-in/cover";
-import SignUpCover from "authentication/sign-up/cover";
+import SignInCover from "authentication/sign-in";
+import SignUpCover from "authentication/sign-up";
 import Error404 from "authentication/error/404";
 import Error500 from "authentication/error/500";
 
@@ -82,26 +82,15 @@ const routes = [
       {
         name: "Sign In",
         key: "sign-in",
-        collapse: [
-          {
-            name: "Cover",
-            key: "cover",
-            route: "authentication/sign-in/cover",
-            component: <SignInCover />,
-          }
-        ],
+        route: "authentication/sign-in",
+        component: <SignInCover />,
       },
       {
         name: "Sign Up",
         key: "sign-up",
-        collapse: [
-          {
-            name: "Cover",
-            key: "cover",
-            route: "/authentication/sign-up/cover",
-            component: <SignUpCover />,
-          },
-        ]
+        route: "/authentication/sign-up",
+        component: <SignUpCover />,
+
       }
     ],
   }

@@ -82,7 +82,7 @@ function Cover() {
             Don&apos;t have an account?{" "}
             <SoftTypography
               component={Link}
-              to="/authentication/sign-up/cover"
+              to="/authentication/sign-up"
               variant="button"
               color="info"
               fontWeight="medium"

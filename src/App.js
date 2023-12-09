@@ -37,9 +37,6 @@ import routes from "routes";
 // Soft UI Dashboard PRO React contexts
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
-// Images
-import brand from "assets/images/logo-ct.png";
-
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
   const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;

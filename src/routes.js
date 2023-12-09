@@ -37,22 +37,15 @@ Coded by www.creative-tim.com
 
 // Soft UI Dashboard PRO React layouts
 
-import SweetAlerts from "layouts/pages/sweet-alerts";
 import OrderList from "order-list";
 import SignInCover from "authentication/sign-in";
 import SignUpCover from "authentication/sign-up";
-import Error404 from "authentication/error/404";
-import Error500 from "authentication/error/500";
+
 
 // Soft UI Dashboard PRO React icons
-import Shop from "examples/Icons/Shop";
-import Office from "examples/Icons/Office";
-import SettingsIcon from "examples/Icons/Settings";
+
 import Basket from "examples/Icons/Basket";
 import Document from "examples/Icons/Document";
-import SpaceShip from "examples/Icons/SpaceShip";
-import CustomerSupport from "examples/Icons/CustomerSupport";
-import CreditCard from "examples/Icons/CreditCard";
 
 const routes = [
   { type: "title", title: "Pages", key: "title-pages" },

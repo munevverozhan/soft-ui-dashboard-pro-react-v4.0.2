@@ -26,7 +26,6 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
@@ -43,7 +42,6 @@ function DataTable({
   canSearch,
   showTotalEntries,
   table,
-  pagination,
   isSorted,
   noEndBorder,
 }) {
@@ -67,11 +65,6 @@ function DataTable({
     rows,
     page,
     pageOptions,
-    canPreviousPage,
-    canNextPage,
-    gotoPage,
-    nextPage,
-    previousPage,
     setPageSize,
     setGlobalFilter,
     state: { pageIndex, pageSize, globalFilter },
@@ -82,16 +75,6 @@ function DataTable({
 
   // Set the entries per page value based on the select value
   const setEntriesPerPage = ({ value }) => setPageSize(value);
-
-  // Handler for the input to set the pagination index
-  const handleInputPagination = ({ target: { value } }) =>
-    value > pageOptions.length || value < 0 ? gotoPage(0) : gotoPage(Number(value));
-
-  // Customized page options starting from 1
-  const customizedPageOptions = pageOptions.map((option) => option + 1);
-
-  // Setting value for the pagination input
-  const handleInputPaginationValue = ({ target: value }) => gotoPage(Number(value.value - 1));
 
   // Search input value state
   const [search, setSearch] = useState(globalFilter);

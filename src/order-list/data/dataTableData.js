@@ -15,10 +15,13 @@ Coded by www.creative-tim.com
 
 /* eslint-disable react/prop-types */
 // ProductsList page components
+import IdCell from "order-list/components/IdCell";
 import DefaultCell from "order-list/components/DefaultCell";
 
 const dataTableData = {
   columns: [
+    { Header: "id", accessor: "id", Cell: ({ value }) => <IdCell id={value} /> },
+
     {
       Header: "product",
       accessor: "product",
@@ -37,40 +40,52 @@ const dataTableData = {
 
   rows: [
     {
-      product: "Nike Sport V2"
+      id: "#10421",
+      product: "Nike Sport V2",
     },
     {
-      product: "Valvet T-shirt"
+      id: "#10422",
+      product: "Valvet T-shirt",
     },
     {
-      product: ["Leather Wallet", { suffix: "+1 more" }]
+      id: "#10423",
+      product: ["Leather Wallet", { suffix: "+1 more" }],
     },
     {
-      product: "Bracelet Onu-Lino"
+      id: "#10424",
+      product: "Bracelet Onu-Lino",
     },
     {
-      product: ["Phone Case Pink", { suffix: "x 2" }]
+      id: "#10425",
+      product: ["Phone Case Pink", { suffix: "x 2" }],
     },
     {
-      product: "Backpack Niver"
+      id: "#10426",
+      product: "Backpack Niver",
     },
     {
-      product: "Adidas Vio"
+      id: "#10427",
+      product: "Adidas Vio",
     },
     {
-      product: "Airpods 2 Gen"
+      id: "#10428",
+      product: "Airpods 2 Gen",
     },
     {
-      product: "Bracelet Warret"
+      id: "#10429",
+      product: "Bracelet Warret",
     },
     {
-      product: ["Watter Bottle India", { suffix: "x 3" }]
+      id: "#10430",
+      product: ["Watter Bottle India", { suffix: "x 3" }],
     },
     {
-      product: "Kitchen Gadgets"
+      id: "#10431",
+      product: "Kitchen Gadgets",
     },
     {
-      product: "Office Papers"
+      id: "#10432",
+      product: "Office Papers",
     },
   ],
 };

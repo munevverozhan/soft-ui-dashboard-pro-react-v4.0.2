@@ -68,7 +68,6 @@ function DataTable({
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   width={column.width ? column.width : "auto"}
                   align={column.align ? column.align : "left"}
-
                 >
                   {column.render("Header")}
                 </DataTableHeadCell>
@@ -96,35 +95,13 @@ function DataTable({
           })}
         </TableBody>
       </Table>
-
-      <SoftBox
-        display="flex"
-        flexDirection={{ xs: "column", sm: "row" }}
-        justifyContent="space-between"
-        alignItems={{ xs: "flex-start", sm: "center" }}
-      >
-      </SoftBox>
     </TableContainer>
   );
 }
 
-
 // Typechecking props for the DataTable
 DataTable.propTypes = {
   table: PropTypes.objectOf(PropTypes.array).isRequired,
-  pagination: PropTypes.shape({
-    variant: PropTypes.oneOf(["contained", "gradient"]),
-    color: PropTypes.oneOf([
-      "primary",
-      "secondary",
-      "info",
-      "success",
-      "warning",
-      "error",
-      "dark",
-      "light",
-    ]),
-  }),
   noEndBorder: PropTypes.bool,
 };
 

@@ -38,7 +38,7 @@ function OrderList() {
 
         </SoftBox>
         <Card>
-          <DataTable table={dataTableData} entriesPerPage={false} canSearch />
+          <DataTable table={dataTableData} />
         </Card>
       </SoftBox>
     </DashboardLayout>

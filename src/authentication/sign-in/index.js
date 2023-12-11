@@ -13,14 +13,13 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
 
-// @mui material components
-import Switch from "@mui/material/Switch";
-
+import axios from "api/axios";
+import useAuth from "hooks/useAuth";
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
@@ -33,67 +32,124 @@ import CoverLayout from "authentication/components/CoverLayout";
 // Images
 import curved9 from "assets/images/curved-images/curved9.jpg";
 
-function Cover() {
-  const [rememberMe, setRememberMe] = useState(true);
+const LOGIN_URL = '/login';
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+function Cover() {
+  const { setAuth } = useAuth();
+
+  const userRef = useRef();
+  const errRef = useRef();
+
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, [])
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [userName, password])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ userName, password }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      );
+      console.log(response.data);
+      const token = response.data.data.token;
+      const rol = response.data.data.role;
+
+      setAuth({ userName, password, rol, token });
+      setUserName('');
+      setPassword('');
+
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('no server response');
+      } else if (err.response?.status === 400) {
+        setErrMsg('missing username or password');
+      } else if (err.response?.status === 401) {
+        setErrMsg('unauthorized');
+      } else {
+        setErrMsg('login failed')
+      }
+      errRef.current.focus();
+    }
+  }
+
 
   return (
-    <CoverLayout
-      title="Welcome back"
-      description="Enter your email and password to sign in"
-      image={curved9}
-    >
-      <SoftBox component="form" role="form">
-        <SoftBox mb={2} lineHeight={1.25}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Email
+    <>
+      <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
+        {errMsg}
+      </p>
+      <CoverLayout
+        title="Welcome back"
+        description="Enter your username and password to sign in"
+        image={curved9}
+      >
+        <SoftBox component="form" role="form" onSubmit={handleSubmit}>
+          <SoftBox mb={2} lineHeight={1.25}>
+            <SoftBox mb={1} ml={0.5}>
+              <SoftTypography component="label" variant="caption" fontWeight="bold">
+                Username
+              </SoftTypography>
+            </SoftBox>
+            <SoftInput
+              type="text"
+              placeholder="Username "
+              ref={userRef}
+              onChange={(e) => setUserName(e.target.value)}
+              value={userName}
+              required
+            />
+          </SoftBox>
+          <SoftBox mb={2} lineHeight={1.25}>
+            <SoftBox mb={1} ml={0.5}>
+              <SoftTypography component="label" variant="caption" fontWeight="bold">
+                Password
+              </SoftTypography>
+            </SoftBox>
+            <SoftInput
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+          </SoftBox>
+
+          <SoftBox mt={4} mb={1}>
+            <SoftButton variant="gradient" color="info" fullWidth>
+              sign in
+            </SoftButton>
+          </SoftBox>
+          <SoftBox mt={3} textAlign="center">
+            <SoftTypography variant="button" color="text" fontWeight="regular">
+              Don&apos;t have an account?{" "}
+              <SoftTypography
+                component={Link}
+                to="/authentication/sign-up"
+                variant="button"
+                color="info"
+                fontWeight="medium"
+                textGradient
+              >
+                Sign up
+              </SoftTypography>
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="email" placeholder="Email" />
         </SoftBox>
-        <SoftBox mb={2} lineHeight={1.25}>
-          <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Password
-            </SoftTypography>
-          </SoftBox>
-          <SoftInput type="password" placeholder="Password" />
-        </SoftBox>
-        <SoftBox display="flex" alignItems="center">
-          <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-          <SoftTypography
-            variant="button"
-            fontWeight="regular"
-            onClick={handleSetRememberMe}
-            sx={{ cursor: "pointer", userSelect: "none" }}
-          >
-            &nbsp;&nbsp;Remember me
-          </SoftTypography>
-        </SoftBox>
-        <SoftBox mt={4} mb={1}>
-          <SoftButton variant="gradient" color="info" fullWidth>
-            sign in
-          </SoftButton>
-        </SoftBox>
-        <SoftBox mt={3} textAlign="center">
-          <SoftTypography variant="button" color="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
-            <SoftTypography
-              component={Link}
-              to="/authentication/sign-up"
-              variant="button"
-              color="info"
-              fontWeight="medium"
-              textGradient
-            >
-              Sign up
-            </SoftTypography>
-          </SoftTypography>
-        </SoftBox>
-      </SoftBox>
-    </CoverLayout>
+      </CoverLayout >
+    </>
   );
 }
 

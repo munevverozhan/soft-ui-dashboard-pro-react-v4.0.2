@@ -38,6 +38,7 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "@three-ts/orbit-controls": "1.4.7",
+    "axios": "^1.6.2",
     "chart.js": "3.9.1",
     "chroma-js": "2.4.2",
     "draft-convert": "^2.1.13",

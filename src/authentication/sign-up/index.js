@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useRef, useState, useEffect } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import axios from "api/axios";
 
@@ -38,21 +38,25 @@ function Cover() {
   const userRef = useRef();
   const errRef = useRef();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
+
   const [userName, setUserName] = useState('');
-  const [userFocus, setUserFocus] = useState(false);
 
   const [password, setPassword] = useState('');
-  const [pwdFocus, setPwdFocus] = useState(false);
+
 
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
+
   }, [])
 
   useEffect(() => {
@@ -89,108 +93,93 @@ function Cover() {
       errRef.current.focus();
     }
 
-    setSuccess(true);
   }
   return (
     <>
       {success
         ?
         <>
-          <section>
-            <h1>success</h1>
-          </section>
           {alert('başarılı bir şekilde kayıt oldunuz !')}
+          {navigate(from, { replace: true })}
         </>
         :
-        <CoverLayout
-          title="Join us today"
-          description="Enter your email and password to register"
-          image={curved11}
-          top={12}
-        >
-          <SoftBox component="form" role="form" onSubmit={handleSubmit}>
-            <SoftBox mb={2} lineHeight={1.25}>
-              <SoftBox mb={1} ml={0.5}>
-                <SoftTypography component="label" variant="caption" fontWeight="bold">
-                  Username
+        <>
+          <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live='assertive'>{errMsg}</p>
+
+          <CoverLayout
+            title="Join us today"
+            description="Enter your username and password to register"
+            image={curved11}
+            top={12}
+          >
+
+            <SoftBox component="form" role="form" onSubmit={handleSubmit}>
+              <SoftBox mb={2} lineHeight={1.25}>
+                <SoftBox mb={1} ml={0.5}>
+                  <SoftTypography component="label" variant="caption" fontWeight="bold">
+                    Username
+                  </SoftTypography>
+                </SoftBox>
+                <SoftInput
+                  placeholder="Username"
+                  type='text'
+                  ref={userRef}
+                  autoComplete='off'
+                  onChange={(e) => setUserName(e.target.value)}
+                  required
+                />
+
+              </SoftBox>
+              <SoftBox mb={2} lineHeight={1.25}>
+                <SoftBox mb={1} ml={0.5}>
+                  <SoftTypography component="label" variant="caption" fontWeight="bold">
+                    Password
+                  </SoftTypography>
+                </SoftBox>
+                <SoftInput
+                  type="password"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </SoftBox>
+              <SoftBox mb={2} lineHeight={1.25}>
+                <SoftBox mb={1} ml={0.5}>
+                  <SoftTypography component="label" variant="caption" fontWeight="bold">
+                    Confirm Password
+                  </SoftTypography>
+                </SoftBox>
+                <SoftInput
+                  type="password"
+                  placeholder="confirm Password"
+                  onChange={(e) => setMatchPwd(e.target.value)}
+                  required
+                  aria-invalid={validMatch ? 'false' : 'true'}
+                />
+              </SoftBox>
+              <SoftBox mt={4} mb={1}>
+                <SoftButton disabled={!userName || !password || !validMatch ? true : false} type="submit" variant="gradient" color="info" fullWidth>
+                  sign up
+                </SoftButton>
+              </SoftBox>
+              <SoftBox mt={3} textAlign="center">
+                <SoftTypography variant="button" color="text" fontWeight="regular">
+                  Already have an account?&nbsp;
+                  <SoftTypography
+                    component={Link}
+                    to="/authentication/sign-in"
+                    variant="button"
+                    color="info"
+                    fontWeight="medium"
+                    textGradient
+                  >
+                    Sign in
+                  </SoftTypography>
                 </SoftTypography>
               </SoftBox>
-              <SoftInput
-                placeholder="Username"
-                type='text'
-                ref={userRef}
-                autoComplete='off'
-                onChange={(e) => setUserName(e.target.value)}
-                required
-                aria-describedby='uidnote'
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)}
-              />
-              <p id='uidnote' className={userFocus && !userName ? 'instructions' : 'offscreen'}>
-                isim alanı boş bırakılamaz
-              </p>
             </SoftBox>
-            <SoftBox mb={2} lineHeight={1.25}>
-              <SoftBox mb={1} ml={0.5}>
-                <SoftTypography component="label" variant="caption" fontWeight="bold">
-                  Password
-                </SoftTypography>
-              </SoftBox>
-              <SoftInput
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                arial-aria-describedby='pwdnote'
-                onFocus={() => setPwdFocus(true)}
-                onBlur={() => setPwdFocus(false)}
-              />
-              <p id='pwdnote' className={pwdFocus && !password ? 'instructions' : 'offscreen'}>
-                şifre boş bırakılamaz
-              </p>
-            </SoftBox>
-            <SoftBox mb={2} lineHeight={1.25}>
-              <SoftBox mb={1} ml={0.5}>
-                <SoftTypography component="label" variant="caption" fontWeight="bold">
-                  Confirm Password
-                </SoftTypography>
-              </SoftBox>
-              <SoftInput
-                type="password"
-                placeholder="confirm Password"
-                onChange={(e) => setMatchPwd(e.target.value)}
-                required
-                aria-invalid={validMatch ? 'false' : 'true'}
-                aria-describedby='confirmnote'
-                onFocus={() => setMatchFocus(true)}
-                onBlur={() => setMatchFocus(false)}
-              />
-              <p id='confirmnote' className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}>
-                Girdi alanı girilen şifre ile aynı olmak zorunda.
-              </p>
-            </SoftBox>
-            <SoftBox mt={4} mb={1}>
-              <SoftButton disabled={!userName || !password || !validMatch ? true : false} variant="gradient" color="info" fullWidth>
-                sign up
-              </SoftButton>
-            </SoftBox>
-            <SoftBox mt={3} textAlign="center">
-              <SoftTypography variant="button" color="text" fontWeight="regular">
-                Already have an account?&nbsp;
-                <SoftTypography
-                  component={Link}
-                  to="/authentication/sign-in"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign in
-                </SoftTypography>
-              </SoftTypography>
-            </SoftBox>
-          </SoftBox>
-        </CoverLayout>
+          </CoverLayout>
+        </>
       }
     </>
   );

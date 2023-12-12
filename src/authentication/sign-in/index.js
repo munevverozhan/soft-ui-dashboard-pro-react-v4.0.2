@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useRef, useState, useEffect } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import axios from "api/axios";
 import useAuth from "hooks/useAuth";
@@ -36,6 +36,10 @@ const LOGIN_URL = '/login';
 
 function Cover() {
   const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const userRef = useRef();
   const errRef = useRef();
@@ -70,7 +74,7 @@ function Cover() {
       setAuth({ userName, password, rol, token });
       setUserName('');
       setPassword('');
-
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg('no server response');
@@ -96,7 +100,7 @@ function Cover() {
         description="Enter your username and password to sign in"
         image={curved9}
       >
-        <SoftBox component="form" role="form" onSubmit={handleSubmit}>
+        <SoftBox component="form" role="form" onSubmit={handleSubmit}  >
           <SoftBox mb={2} lineHeight={1.25}>
             <SoftBox mb={1} ml={0.5}>
               <SoftTypography component="label" variant="caption" fontWeight="bold">
@@ -110,6 +114,7 @@ function Cover() {
               onChange={(e) => setUserName(e.target.value)}
               value={userName}
               required
+              autoFocus
             />
           </SoftBox>
           <SoftBox mb={2} lineHeight={1.25}>
@@ -128,7 +133,7 @@ function Cover() {
           </SoftBox>
 
           <SoftBox mt={4} mb={1}>
-            <SoftButton variant="gradient" color="info" fullWidth>
+            <SoftButton type="submit" variant="gradient" color="info" fullWidth >
               sign in
             </SoftButton>
           </SoftBox>

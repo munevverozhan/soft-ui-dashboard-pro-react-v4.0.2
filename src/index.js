@@ -20,13 +20,16 @@ import App from "App";
 
 // Soft UI Context Provider
 import { SoftUIControllerProvider } from "context";
+import { AuthProvider } from "context/AuthProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
-    <SoftUIControllerProvider>
-      <App />
-    </SoftUIControllerProvider>
+    <AuthProvider>
+      <SoftUIControllerProvider>
+        <App />
+      </SoftUIControllerProvider>
+    </AuthProvider>
   </BrowserRouter>
 );

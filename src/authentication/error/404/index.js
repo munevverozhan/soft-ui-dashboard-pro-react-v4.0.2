@@ -65,7 +65,7 @@ function Error404() {
                 </SoftTypography>
               </SoftBox>
               <SoftBox mt={4} mb={2}>
-                <SoftButton component={Link} to="/authentication/sign-in/cover" variant="gradient" color="dark">
+                <SoftButton component={Link} to="/authentication/sign-in" variant="gradient" color="dark">
                   go to homepage
                 </SoftButton>
               </SoftBox>

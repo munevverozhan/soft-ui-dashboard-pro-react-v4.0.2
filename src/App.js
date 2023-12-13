@@ -109,8 +109,6 @@ export default function App() {
       return null;
     });
 
-
-
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
       <ThemeProvider theme={themeRTL}>
@@ -129,7 +127,9 @@ export default function App() {
       {layout === "vr"}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+        <Route path="/login" element={<Navigate to="/authentication/sign-in" />} />
+        <Route path="/*" element={<Navigate to='/authentication/error/404' /> } />
+
         <Route path='/' element={<Layout />} >
           {/* public routes */}
           <Route path='/linkpage' element={<LinkPage />} />

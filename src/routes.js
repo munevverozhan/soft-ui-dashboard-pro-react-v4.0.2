@@ -40,7 +40,7 @@ Coded by www.creative-tim.com
 import OrderList from "order-list";
 import SignInCover from "authentication/sign-in";
 import SignUpCover from "authentication/sign-up";
-
+import Error404 from "authentication/error/404";
 
 // Soft UI Dashboard PRO React icons
 
@@ -85,8 +85,20 @@ const routes = [
         component: <SignUpCover />,
 
       }
-    ],
-  }
+    ]
+  },
+  {
+    name: "Error",
+        key: "error",
+        collapse: [
+          {
+            name: "Error 404",
+            key: "error-404",
+            route: "/authentication/error/404",
+            component: <Error404 />,
+          },
+        ]
+        }
 ];
 
 export default routes;

@@ -38,8 +38,10 @@ import Layout from "components/Layout";
 import LinkPage from "components/LinkPage";
 import Unauthorized from "components/Unauthorized";
 import RequireAuth from "./components/RequireAuth";
-import Show from "components/Show";
+import Home from './components/Home';
 import Admin from "components/Admin";
+import PersistLogin from "components/PersistLogin";
+
 
 // Soft UI Dashboard PRO React contexts
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
@@ -128,7 +130,7 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         <Route path="/login" element={<Navigate to="/authentication/sign-in" />} />
-        <Route path="/*" element={<Navigate to='/authentication/error/404' /> } />
+        <Route path="/*" element={<Navigate to='/authentication/error/404' />} />
 
         <Route path='/' element={<Layout />} >
           {/* public routes */}
@@ -136,11 +138,13 @@ export default function App() {
           <Route path="unauthorized" element={<Unauthorized />} />
 
           {/* we want to protected this routes */}
-          <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
-            <Route path='/' element={<Show />} />
-          </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-            <Route path='/admin' element={<Admin />} />
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+              <Route path='/' element={<Home />} />
+            </Route>
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+              <Route path='/admin' element={<Admin />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

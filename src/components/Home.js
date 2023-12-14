@@ -1,5 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
+import SoftButton from "./SoftButton";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -7,7 +8,7 @@ const Home = () => {
 
     const signOut = async () => {
         await logout();
-        navigate('/linkpage');
+        navigate('/authentication/sign-in');
     }
 
     return (
@@ -20,10 +21,10 @@ const Home = () => {
             <Link to="/admin">Go to the Admin page</Link>
             <br />
             <Link to="/linkpage">Go to the link page</Link>
-            <div className="flexGrow">
-                <button onClick={signOut}>Sign Out</button>
-            </div>
-        </section>
+                <div >
+                    <SoftButton onClick={signOut}>Sign Out</SoftButton>
+                </div>
+            </section>
     )
 }
 

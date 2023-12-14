@@ -13,7 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect, useMemo } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -24,12 +23,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 // Soft UI Dashboard PRO React themes
 import theme from "assets/theme";
-import themeRTL from "assets/theme/theme-rtl";
-
-// RTL plugins
-import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
 
 // Soft UI Dashboard PRO React routes
 import routes from "routes";
@@ -40,11 +33,7 @@ import Unauthorized from "components/Unauthorized";
 import RequireAuth from "./components/RequireAuth";
 import Home from './components/Home';
 import Admin from "components/Admin";
-import PersistLogin from "components/PersistLogin";
 
-
-// Soft UI Dashboard PRO React contexts
-import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 const ROLES = {
   'User': 'ROLE_CLIENT',
@@ -52,51 +41,6 @@ const ROLES = {
 }
 
 export default function App() {
-  const [controller, dispatch] = useSoftUIController();
-  const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;
-  const [onMouseEnter, setOnMouseEnter] = useState(false);
-  const [rtlCache, setRtlCache] = useState(null);
-  const { pathname } = useLocation();
-
-  // Cache for the rtl
-  useMemo(() => {
-    const cacheRtl = createCache({
-      key: "rtl",
-      stylisPlugins: [rtlPlugin],
-    });
-
-    setRtlCache(cacheRtl);
-  }, []);
-
-  // Open sidenav when mouse enter on mini sidenav
-  const handleOnMouseEnter = () => {
-    if (miniSidenav && !onMouseEnter) {
-      setMiniSidenav(dispatch, false);
-      setOnMouseEnter(true);
-    }
-  };
-
-  // Close sidenav when mouse leave mini sidenav
-  const handleOnMouseLeave = () => {
-    if (onMouseEnter) {
-      setMiniSidenav(dispatch, true);
-      setOnMouseEnter(false);
-    }
-  };
-
-  // Change the openConfigurator state
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
-
-  // Setting the dir attribute for the body element
-  useEffect(() => {
-    document.body.setAttribute("dir", direction);
-  }, [direction]);
-
-  // Setting page scroll to 0 when changing the route
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-  }, [pathname]);
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
@@ -111,22 +55,9 @@ export default function App() {
       return null;
     });
 
-  return direction === "rtl" ? (
-    <CacheProvider value={rtlCache}>
-      <ThemeProvider theme={themeRTL}>
-        <CssBaseline />
-        {layout === "vr"}
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
-        </Routes>
-      </ThemeProvider>
-    </CacheProvider>
-  ) : (
+  return  (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
-      {layout === "vr"}
       <Routes>
         {getRoutes(routes)}
         <Route path="/login" element={<Navigate to="/authentication/sign-in" />} />
@@ -138,15 +69,16 @@ export default function App() {
           <Route path="unauthorized" element={<Unauthorized />} />
 
           {/* we want to protected this routes */}
-          <Route element={<PersistLogin />}>
             <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
               <Route path='/' element={<Home />} />
             </Route>
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-              <Route path='/admin' element={<Admin />} />
+              <Route path='/admin'
+                element={
+                  <Admin />
+                } />
             </Route>
           </Route>
-        </Route>
       </Routes>
     </ThemeProvider>
   );

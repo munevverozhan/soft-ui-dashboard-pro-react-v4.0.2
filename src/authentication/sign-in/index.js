@@ -48,6 +48,8 @@ function Cover() {
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
+  const userToken = localStorage.getItem('token');
+
   useEffect(() => {
     userRef.current.focus();
   }, [])
@@ -55,9 +57,11 @@ function Cover() {
   useEffect(() => {
     setErrMsg('');
   }, [userName, password])
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(
         LOGIN_URL,
@@ -66,15 +70,22 @@ function Cover() {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         }
-      );
-      console.log(response.data);
+      )
+
+      console.log('response.data', response.data);
+
       const token = response.data.data.token;
       const rol = response.data.data.role;
 
+      localStorage.setItem('token', token);
+
       setAuth({ userName, password, rol, token });
+
       setUserName('');
       setPassword('');
-      navigate(from, { replace: true });
+
+      navigate(from, { replace: true })
+
     } catch (err) {
       if (!err?.response) {
         setErrMsg('no server response');
@@ -95,11 +106,13 @@ function Cover() {
       <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
         {errMsg}
       </p>
+
       <CoverLayout
         title="Welcome back"
         description="Enter your username and password to sign in"
         image={curved9}
       >
+
         <SoftBox component="form" role="form" onSubmit={handleSubmit}  >
           <SoftBox mb={2} lineHeight={1.25}>
             <SoftBox mb={1} ml={0.5}>
@@ -117,6 +130,7 @@ function Cover() {
               autoFocus
             />
           </SoftBox>
+
           <SoftBox mb={2} lineHeight={1.25}>
             <SoftBox mb={1} ml={0.5}>
               <SoftTypography component="label" variant="caption" fontWeight="bold">
@@ -137,6 +151,7 @@ function Cover() {
               sign in
             </SoftButton>
           </SoftBox>
+
           <SoftBox mt={3} textAlign="center">
             <SoftTypography variant="button" color="text" fontWeight="regular">
               Don&apos;t have an account?{" "}

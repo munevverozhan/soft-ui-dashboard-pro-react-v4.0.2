@@ -25,17 +25,8 @@ const dataTableData = {
     {
       Header: "product",
       accessor: "product",
-      Cell: ({ value }) => {
-        const [name, data] = value;
-
-        return (
-          <DefaultCell
-            value={typeof value === "string" ? value : name}
-            suffix={data.suffix || false}
-          />
-        );
-      },
-    },
+      Cell: ({ value }) => <DefaultCell value={value} />
+    }
   ],
 
   rows: [
@@ -49,7 +40,7 @@ const dataTableData = {
     },
     {
       id: "#10423",
-      product: ["Leather Wallet", { suffix: "+1 more" }],
+      product: "Leather Wallet",
     },
     {
       id: "#10424",
@@ -57,7 +48,7 @@ const dataTableData = {
     },
     {
       id: "#10425",
-      product: ["Phone Case Pink", { suffix: "x 2" }],
+      product: "Phone Case Pink",
     },
     {
       id: "#10426",
@@ -77,7 +68,7 @@ const dataTableData = {
     },
     {
       id: "#10430",
-      product: ["Watter Bottle India", { suffix: "x 3" }],
+      product: "Watter Bottle India",
     },
     {
       id: "#10431",

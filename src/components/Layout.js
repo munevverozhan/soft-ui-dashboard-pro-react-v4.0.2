@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom"
+import useAuth from "hooks/useAuth";
+import { Navigate, Outlet } from "react-router-dom"
 
 const Layout = () => {
-    return (
-        <main className="App">
-            <Outlet />
-        </main>
-    )
+    const { token } = useAuth();
+    if (!token) {
+        return <Navigate to='/login' />
+    }
+    return <Outlet />
 }
 export default Layout;

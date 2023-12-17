@@ -34,6 +34,7 @@ import RequireAuth from "./components/RequireAuth";
 import Home from './components/Home';
 import Admin from "components/Admin";
 import OrderList from "order-list";
+import { Children } from "react";
 
 const ROLES = {
   'User': 'ROLE_CLIENT',
@@ -64,6 +65,7 @@ export default function App() {
         <Route path="/*" element={<Navigate to='/authentication/error/404' />} />
 
         <Route path='/' element={<Layout />} >
+          Children:[
           {/* public routes */}
           <Route path='/linkpage' element={<LinkPage />} />
           <Route path="unauthorized" element={<Unauthorized />} />
@@ -78,9 +80,10 @@ export default function App() {
                 <Admin />
               } />
           </Route>
-        </Route>
-        <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
-          <Route path="/order-list" element={<OrderList/>} />
+          <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+            <Route path="/order-list" element={<OrderList />} />
+          </Route>
+          ]
         </Route>
       </Routes>
     </ThemeProvider>

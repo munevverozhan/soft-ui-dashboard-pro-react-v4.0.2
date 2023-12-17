@@ -35,7 +35,7 @@ import curved9 from "assets/images/curved-images/curved9.jpg";
 const LOGIN_URL = '/login';
 
 function Cover() {
-  const { setAuth } = useAuth();
+  const { setAuth, setToken } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,6 +58,7 @@ function Cover() {
 
   console.log(location)
   console.log('local storage : ', localStorage);
+  console.log('common: ', axios.defaults.headers.common);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,7 +77,7 @@ function Cover() {
       const token = response.data.data.token;
       const rol = response.data.data.role;
 
-      localStorage.setItem('token', token);
+      setToken(token);
       console.log('local storage : ', localStorage);
 
       setAuth({ userName, password, rol, token });

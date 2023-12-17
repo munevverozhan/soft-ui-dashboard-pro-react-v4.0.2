@@ -19,28 +19,18 @@ import PropTypes from "prop-types";
 // Soft UI Dashboard PRO React components
 import SoftTypography from "components/SoftTypography";
 
-function DefaultCell({ value, suffix }) {
+function DefaultCell({ value }) {
   return (
     <SoftTypography variant="caption" fontWeight="medium" color="text">
       {value}
-      {suffix && (
-        <SoftTypography variant="caption" fontWeight="medium" color="secondary">
-          &nbsp;&nbsp;{suffix}
-        </SoftTypography>
-      )}
+      
     </SoftTypography>
   );
 }
 
-// Setting default values for the props of DefaultCell
-DefaultCell.defaultProps = {
-  suffix: "",
-};
-
 // Typechecking props for the DefaultCell
 DefaultCell.propTypes = {
   value: PropTypes.string.isRequired,
-  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default DefaultCell;

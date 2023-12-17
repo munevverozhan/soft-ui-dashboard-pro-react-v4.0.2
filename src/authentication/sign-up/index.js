@@ -56,7 +56,6 @@ function Cover() {
 
   useEffect(() => {
     userRef.current.focus();
-
   }, [])
 
   useEffect(() => {
@@ -127,6 +126,7 @@ function Cover() {
                   autoComplete='off'
                   onChange={(e) => setUserName(e.target.value)}
                   required
+                  autoFocus
                 />
 
               </SoftBox>

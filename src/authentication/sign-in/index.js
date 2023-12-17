@@ -39,16 +39,14 @@ function Cover() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
-
   const userRef = useRef();
   const errRef = useRef();
+
+  const from = location.state?.from?.pathname || '/';
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
-
-  const userToken = localStorage.getItem('token');
 
   useEffect(() => {
     userRef.current.focus();
@@ -57,7 +55,9 @@ function Cover() {
   useEffect(() => {
     setErrMsg('');
   }, [userName, password])
- 
+
+  console.log(location)
+  console.log('local storage : ', localStorage);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,13 +71,13 @@ function Cover() {
           withCredentials: true
         }
       )
-
       console.log('response.data', response.data);
 
       const token = response.data.data.token;
       const rol = response.data.data.role;
 
       localStorage.setItem('token', token);
+      console.log('local storage : ', localStorage);
 
       setAuth({ userName, password, rol, token });
 
@@ -99,7 +99,6 @@ function Cover() {
       errRef.current.focus();
     }
   }
-
 
   return (
     <>

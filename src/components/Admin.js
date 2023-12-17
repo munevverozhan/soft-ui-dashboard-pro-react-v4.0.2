@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 const Admin = () => {
+    const location = useLocation();
+    console.log('lokasyon : ', location.pathname);
+
     return (
         <section>
             <h1>Admins Page</h1>

@@ -37,35 +37,17 @@ Coded by www.creative-tim.com
 
 // Soft UI Dashboard PRO React layouts
 
-import OrderList from "order-list";
 import SignInCover from "authentication/sign-in";
 import SignUpCover from "authentication/sign-up";
 import Error404 from "authentication/error/404";
 
 // Soft UI Dashboard PRO React icons
 
-import Basket from "examples/Icons/Basket";
 import Document from "examples/Icons/Document";
 
 const routes = [
   { type: "title", title: "Pages", key: "title-pages" },
 
-  {
-    type: "collapse",
-    name: "Ecommerce",
-    key: "ecommerce",
-    icon: <Basket size="12px" />,
-
-    collapse: [
-      {
-        name: "Order List",
-        key: "order-list",
-        route: "order-list",
-        component: <OrderList />,
-      }
-    ],
-
-  },
   {
     type: "collapse",
     name: "Authentication",
@@ -98,7 +80,7 @@ const routes = [
             component: <Error404 />,
           },
         ]
-        }
+  }
 ];
 
 export default routes;

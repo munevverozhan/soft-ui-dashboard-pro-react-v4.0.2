@@ -33,7 +33,7 @@ import Unauthorized from "components/Unauthorized";
 import RequireAuth from "./components/RequireAuth";
 import Home from './components/Home';
 import Admin from "components/Admin";
-
+import OrderList from "order-list";
 
 const ROLES = {
   'User': 'ROLE_CLIENT',
@@ -55,7 +55,7 @@ export default function App() {
       return null;
     });
 
-  return  (
+  return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
@@ -69,16 +69,19 @@ export default function App() {
           <Route path="unauthorized" element={<Unauthorized />} />
 
           {/* we want to protected this routes */}
-            <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
-              <Route path='/' element={<Home />} />
-            </Route>
-            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-              <Route path='/admin'
-                element={
-                  <Admin />
-                } />
-            </Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+            <Route path='/' element={<Home />} />
           </Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route path='/admin'
+              element={
+                <Admin />
+              } />
+          </Route>
+        </Route>
+        <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+          <Route path="/order-list" element={<OrderList/>} />
+        </Route>
       </Routes>
     </ThemeProvider>
   );

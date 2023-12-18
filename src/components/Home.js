@@ -1,6 +1,7 @@
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
 import SoftButton from "./SoftButton";
+import axios from "api/axios";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -13,6 +14,10 @@ const Home = () => {
         await logout();
         localStorage.removeItem('token');
         navigate('/authentication/sign-in');
+    }
+    const getCurrentUser =async ()=>{
+        const response = await axios.get('/getUser/test');
+        console.log(response.data);
     }
 
     return (
@@ -30,8 +35,12 @@ const Home = () => {
             <Link to='/order-list'>Todo List </Link>
             <br />
 
+
             <div >
                 <SoftButton onClick={signOut}>Sign Out</SoftButton>
+            </div>
+            <div >
+                <SoftButton onClick={getCurrentUser}>current user</SoftButton>
             </div>
         </section>
     )

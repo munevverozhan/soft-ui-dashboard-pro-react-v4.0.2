@@ -4,8 +4,8 @@ import { createContext, useEffect, useMemo, useState } from 'react';
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({});
-     // State to hold the authentication token
+  const [auth, setAuth] = useState({});
+  // State to hold the authentication token
   const [token, setToken_] = useState(localStorage.getItem("token"));
 
   // Function to set the authentication token
@@ -16,12 +16,15 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      localStorage.setItem('token',token);
+      localStorage.setItem('token', token);
     } else {
       delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem('token')
     }
   }, [token]);
+
+  useEffect(() => {
+    console.log('***************', auth)
+  }, [auth])
 
   // Memoized value of the authentication context
   const contextValue = useMemo(

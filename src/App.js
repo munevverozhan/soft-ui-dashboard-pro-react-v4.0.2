@@ -34,7 +34,10 @@ import RequireAuth from "./components/RequireAuth";
 import Home from './components/Home';
 import Admin from "components/Admin";
 import OrderList from "order-list";
-import { Children } from "react";
+import { useEffect } from "react";
+import axios from "api/axios";
+import useAuth from "hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const ROLES = {
   'User': 'ROLE_CLIENT',
@@ -42,6 +45,9 @@ const ROLES = {
 }
 
 export default function App() {
+
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
@@ -56,6 +62,26 @@ export default function App() {
       return null;
     });
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log('app.js token', token);
+    if (token !== null && token !== undefined && token !== '') {
+      if (!(auth !== null && auth !== undefined && auth.id > 0)) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+
+        axios.get('/current-user').then((response) => {
+          setAuth(response.data)
+
+        }).catch((error) => {
+          console.log(error)
+          setAuth({})
+        }
+        )
+      }
+    }
+
+  }, [auth])
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -64,8 +90,8 @@ export default function App() {
         <Route path="/login" element={<Navigate to="/authentication/sign-in" />} />
         <Route path="/*" element={<Navigate to='/authentication/error/404' />} />
 
-        <Route path='/' element={<Layout />} >
-          Children:[
+        
+
           {/* public routes */}
           <Route path='/linkpage' element={<LinkPage />} />
           <Route path="unauthorized" element={<Unauthorized />} />
@@ -83,8 +109,7 @@ export default function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/order-list" element={<OrderList />} />
           </Route>
-          ]
-        </Route>
+
       </Routes>
     </ThemeProvider>
   );

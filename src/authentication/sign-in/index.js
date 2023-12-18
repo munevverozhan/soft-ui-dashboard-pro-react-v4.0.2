@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useRef, useState, useEffect } from "react";
 
 // react-router-dom components
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import axios from "api/axios";
 import useAuth from "hooks/useAuth";
@@ -35,12 +35,13 @@ import curved9 from "assets/images/curved-images/curved9.jpg";
 const LOGIN_URL = '/login';
 
 function Cover() {
-  const { setAuth, setToken } = useAuth();
+  const { auth, setAuth, setToken } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   const userRef = useRef();
   const errRef = useRef();
+  const router = useRout
 
   const from = location.state?.from?.pathname || '/';
 
@@ -55,6 +56,12 @@ function Cover() {
   useEffect(() => {
     setErrMsg('');
   }, [userName, password])
+
+  useEffect(() => {
+    if (auth !== null && auth !== undefined && auth.id > 0) {
+      navigate('/');
+    }
+  }, [auth])
 
   console.log(location)
   console.log('local storage : ', localStorage);
@@ -76,16 +83,17 @@ function Cover() {
 
       const token = response.data.data.token;
       const rol = response.data.data.role;
+      const id = response.data.data.id;
 
       setToken(token);
       console.log('local storage : ', localStorage);
 
-      setAuth({ userName, password, rol, token });
+      setAuth({id,userName, password, rol, token });
 
       setUserName('');
       setPassword('');
 
-      navigate(from, { replace: true })
+    return <Navigate to='/linkpage'/>
 
     } catch (err) {
       if (!err?.response) {

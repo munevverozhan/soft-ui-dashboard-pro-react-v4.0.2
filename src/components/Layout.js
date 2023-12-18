@@ -1,11 +1,16 @@
 import useAuth from "hooks/useAuth";
-import { Navigate, Outlet } from "react-router-dom"
+import { useEffect } from "react";
+import { Navigate, Outlet, useNavigate } from "react-router-dom"
 
 const Layout = () => {
-    const { token } = useAuth();
-    if (!token) {
-        return <Navigate to='/login' />
-    }
+    // const { auth } = useAuth();
+    // const navigate = useNavigate();
+    // useEffect(() => {
+    //     if (auth !== null && auth !== undefined && auth.id > 0){
+    //         navigate('/');
+    //     }
+    // }, [auth])
+   
     return <Outlet />
 }
 export default Layout;

@@ -1,27 +1,29 @@
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
 import SoftButton from "./SoftButton";
 import axios from "api/axios";
+import useAuth from "hooks/useAuth";
+import { useEffect } from "react";
 
 const Home = () => {
     const navigate = useNavigate();
-    const location = useLocation();
     const logout = useLogout();
-
-    console.log('lokasyon : ', location.pathname);
+    // const { requireAuthorization } = useAuth();
+    // useEffect(() => {
+    //     requireAuthorization(['ROLE_ADMIN', 'ROLE_CLIENT']);
+    // }, []);
 
     const signOut = async () => {
         await logout();
         localStorage.removeItem('token');
         navigate('/authentication/sign-in');
     }
-    const getCurrentUser =async ()=>{
+    const getCurrentUser = async () => {
         const response = await axios.get('/getUser/test');
         console.log(response.data);
     }
 
     return (
-
         <section>
             <h1>Home</h1>
             <br />
@@ -35,7 +37,6 @@ const Home = () => {
             <Link to='/order-list'>Todo List </Link>
             <br />
 
-
             <div >
                 <SoftButton onClick={signOut}>Sign Out</SoftButton>
             </div>
@@ -46,4 +47,5 @@ const Home = () => {
     )
 }
 
-export default Home
+//export default RequireAuth(['ROLE_ADMIN,ROLE_USER'])(Home)
+export default Home;

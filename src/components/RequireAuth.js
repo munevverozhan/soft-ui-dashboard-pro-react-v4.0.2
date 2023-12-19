@@ -1,20 +1,24 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 
-const RequireAuth = ({ allowedRoles }) => {
-    const { auth } = useAuth();
-    const location = useLocation();
-    console.log(auth);
+import useAuth from 'hooks/useAuth';
+import { Navigate } from 'react-router-dom';
+import { Component } from 'react';
 
-    console.log(allowedRoles?.includes(auth?.rol));
-    console.log('allowedRoles: ', allowedRoles);
-
-    return (
-        allowedRoles?.includes(auth?.rol)
-            ? <Navigate to='/'/>
-            : auth?.id
-                ? <Navigate to='/unauthorized' state={{ from: location }} replace />
-                : < Navigate to='/login' state={{ from: location }} replace />
-    );
+const RequireAuth = (userTypes) => (ChildComponent) => {
+    class ComposedComponent extends Component {
+        render() {
+            const { auth } = useAuth();
+            if (auth && auth.id > 0) {
+                if (userTypes.includes(auth.rol)) {
+                    return < ChildComponent {...auth} />
+                }
+                return <Navigate to='/unauthorized' />
+            }
+            return (
+                <Navigate to='/login' />
+            );
+        }
+    }
+    return ComposedComponent;
 }
+
 export default RequireAuth;

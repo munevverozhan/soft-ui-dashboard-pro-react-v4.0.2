@@ -41,7 +41,7 @@ function Cover() {
   const location = useLocation();
   const userRef = useRef();
   const errRef = useRef();
-  const router = useRout
+
 
   const from = location.state?.from?.pathname || '/';
 

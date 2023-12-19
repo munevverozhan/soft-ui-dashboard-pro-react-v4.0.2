@@ -1,8 +1,12 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
+import useAuth from "hooks/useAuth";
+import { useEffect } from "react";
 
 const Admin = () => {
-    const location = useLocation();
-    console.log('lokasyon : ', location.pathname);
+    const {requireAuthorization} = useAuth();
+    useEffect(() => {
+        requireAuthorization(['ROLE_ADMIN']);
+    }, []);
 
     return (
         <section>
@@ -16,4 +20,5 @@ const Admin = () => {
     )
 }
 
-export default Admin
+// export default RequireAuth(['ROLES.Admin']) (Admin)
+export default Admin;

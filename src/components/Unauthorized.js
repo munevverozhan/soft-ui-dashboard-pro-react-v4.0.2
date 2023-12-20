@@ -4,7 +4,6 @@ import SoftButton from "./SoftButton";
 const Unauthorized = () => {
     const navigate = useNavigate();
 
-    const goLogin = () => navigate('/login');
     const goHome = () => navigate('/');
 
     return (
@@ -13,7 +12,7 @@ const Unauthorized = () => {
             <br/>
             <p>You do not have access to the requested page.</p>
             <div className="flexGrow">
-                <SoftButton onClick={goLogin}>Go login</SoftButton>
+               
                 <br/>
                 <SoftButton onClick={goHome}>Go home</SoftButton>
 

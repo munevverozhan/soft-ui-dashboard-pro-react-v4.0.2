@@ -1,9 +1,11 @@
 import {useNavigate} from "react-router-dom"
+import SoftButton from "./SoftButton";
 
 const Unauthorized = () => {
     const navigate = useNavigate();
 
-    const goBack = () => navigate(-1) ? navigate(-1) : navigate('/register');
+    const goLogin = () => navigate('/login');
+    const goHome = () => navigate('/');
 
     return (
         <section>
@@ -11,7 +13,10 @@ const Unauthorized = () => {
             <br/>
             <p>You do not have access to the requested page.</p>
             <div className="flexGrow">
-                <button onClick={goBack}>Go Back</button>
+                <SoftButton onClick={goLogin}>Go login</SoftButton>
+                <br/>
+                <SoftButton onClick={goHome}>Go home</SoftButton>
+
             </div>
         </section>
     )

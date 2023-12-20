@@ -20,5 +20,4 @@ const Admin = () => {
     )
 }
 
-// export default RequireAuth(['ROLES.Admin']) (Admin)
 export default Admin;

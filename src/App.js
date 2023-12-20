@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 
 
 // react-router components
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -32,13 +32,15 @@ import Unauthorized from "components/Unauthorized";
 import Home from './components/Home';
 import Admin from "components/Admin";
 import OrderList from "order-list";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "api/axios";
 import useAuth from "hooks/useAuth";
 
 export default function App() {
 
   const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
@@ -53,16 +55,16 @@ export default function App() {
       return null;
     });
 
+
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log('app.js token', token);
     if (token !== null && token !== undefined && token !== '') {
+
       if (!(auth !== null && auth !== undefined && auth.id > 0)) {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-
         axios.get('/current-user').then((response) => {
           setAuth(response.data)
-
+          setIsLoggedIn(true)
         }).catch((error) => {
           console.log(error)
           setAuth({})
@@ -72,6 +74,17 @@ export default function App() {
     }
 
   }, [auth])
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log('hiy')
+
+      navigate('/');
+    }
+  }, [isLoggedIn])
+
+
+  console.log('loggedin', isLoggedIn);
 
 
   return (
@@ -87,7 +100,7 @@ export default function App() {
 
         {/* we want to protected this routes */}
 
-        <Route path='/' element={<Home/>} />
+        <Route path='/' element={<Home />} />
         <Route path='/admin' element={<Admin />} />
         <Route path="/order-list" element={<OrderList />} />
 

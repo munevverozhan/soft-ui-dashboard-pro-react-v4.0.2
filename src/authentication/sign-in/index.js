@@ -88,12 +88,12 @@ function Cover() {
       setToken(token);
       console.log('local storage : ', localStorage);
 
-      setAuth({id,userName, password, rol, token });
+      setAuth({ id, userName, password, rol, token });
 
       setUserName('');
       setPassword('');
 
-    return <Navigate to='/linkpage'/>
+      navigate('/');
 
     } catch (err) {
       if (!err?.response) {

@@ -10,7 +10,7 @@ const Home = () => {
     const logout = useLogout();
     // const { requireAuthorization } = useAuth();
     // useEffect(() => {
-    //     requireAuthorization(['ROLE_ADMIN', 'ROLE_CLIENT']);
+    //     requireAuthorization(['ROLE_CLIENT']);
     // }, []);
 
     const signOut = async () => {
@@ -19,7 +19,7 @@ const Home = () => {
         navigate('/authentication/sign-in');
     }
     const getCurrentUser = async () => {
-        const response = await axios.get('/getUser/test');
+        const response = await axios.get('/getUser/test5');
         console.log(response.data);
     }
 

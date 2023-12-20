@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useRef, useState, useEffect } from "react";
 
 // react-router-dom components
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import axios from "api/axios";
 import useAuth from "hooks/useAuth";
@@ -35,15 +35,12 @@ import curved9 from "assets/images/curved-images/curved9.jpg";
 const LOGIN_URL = '/login';
 
 function Cover() {
-  const { auth, setAuth, setToken } = useAuth();
+  const {setAuth, setToken } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   const userRef = useRef();
   const errRef = useRef();
-
-
-  const from = location.state?.from?.pathname || '/';
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -57,11 +54,11 @@ function Cover() {
     setErrMsg('');
   }, [userName, password])
 
-  useEffect(() => {
-    if (auth !== null && auth !== undefined && auth.id > 0) {
-      navigate('/');
-    }
-  }, [auth])
+  // useEffect(() => {
+  //   if (auth !== null && auth !== undefined && auth.id > 0) {
+  //     navigate('/');
+  //   }
+  // }, [auth])
 
   console.log(location)
   console.log('local storage : ', localStorage);
@@ -89,6 +86,7 @@ function Cover() {
       console.log('local storage : ', localStorage);
 
       setAuth({ id, userName, password, rol, token });
+      console.log('auth login: ',rol)
 
       setUserName('');
       setPassword('');

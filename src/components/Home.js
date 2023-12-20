@@ -8,10 +8,10 @@ import { useEffect } from "react";
 const Home = () => {
     const navigate = useNavigate();
     const logout = useLogout();
-    // const { requireAuthorization } = useAuth();
-    // useEffect(() => {
-    //     requireAuthorization(['ROLE_CLIENT']);
-    // }, []);
+    const { requireAuthorization } = useAuth();
+    useEffect(() => {
+        requireAuthorization(['ROLE_CLIENT','ROLE_ADMIN']);
+    }, []);
 
     const signOut = async () => {
         await logout();
@@ -47,5 +47,4 @@ const Home = () => {
     )
 }
 
-//export default RequireAuth(['ROLE_ADMIN,ROLE_USER'])(Home)
 export default Home;

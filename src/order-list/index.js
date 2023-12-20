@@ -15,7 +15,6 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Card from "@mui/material/Card";
-import RequireAuth from "components/RequireAuth";
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
 import SoftButton from "components/SoftButton";
@@ -30,10 +29,11 @@ import dataTableData from "order-list/data/dataTableData";
 import { useEffect } from "react";
 
 function OrderList() {
-// const {requireAuthorization}=useAuth();
-// useEffect(()=>{
-// requireAuthorization(['ROLE_CLIENT', 'ROLE_ADMIN']);
-// },[]);
+const {requireAuthorization}=useAuth();
+useEffect(()=>{
+requireAuthorization(['ROLE_CLIENT', 'ROLE_ADMIN']);
+},[]);
+
   return (
     <DashboardLayout>
       <SoftBox my={3}>
@@ -51,5 +51,4 @@ function OrderList() {
   );
 }
 
-//export default RequireAuth(['ROLE-CLIENT', 'ROLE-ADMIN']) (OrderList);
 export default OrderList;

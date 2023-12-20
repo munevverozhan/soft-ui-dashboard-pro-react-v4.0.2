@@ -14,22 +14,29 @@ const useAuth = () => {
         if (auth && auth.id > 0) {
             return true;
         }
-            navigate('/login');
-            return false;
+        navigate('/login');
+        return false;
     }
-
 
     const requireAuthorization = (userTypes) => {
         if (requireAuthentication) {
-            if (userTypes.includes(auth?.rol)) {
-           // console.log('user types ', userTypes.includes(auth?.rol))
-            return true;
+            
+            if (userTypes.includes(auth.rol)) {
+                console.log('auth hel', auth.rol)
+                console.log('user hel', userTypes)
+                console.log("yönlendirme çalıştı")
 
+             return true;
             }
+            console.log('user types ', (auth))
+            console.log('şu an burdas');
+            console.log("yetkiniz yok")
+
             navigate('/unauthorized');
             return false;
-        }
+           
 
+        }
     }
 
     return { ...authContext, requireAuthentication, requireAuthorization };

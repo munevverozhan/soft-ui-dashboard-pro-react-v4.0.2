@@ -32,7 +32,7 @@ import Unauthorized from "components/Unauthorized";
 import Home from './components/Home';
 import Admin from "components/Admin";
 import OrderList from "order-list";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "api/axios";
 import useAuth from "hooks/useAuth";
 
@@ -40,7 +40,6 @@ export default function App() {
 
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
@@ -64,34 +63,24 @@ export default function App() {
         axios.defaults.headers.common["Authorization"] = "Bearer " + token;
         axios.get('/current-user').then((response) => {
           setAuth(response.data)
-          setIsLoggedIn(true)
         }).catch((error) => {
           console.log(error)
-          setAuth({})
+         setAuth({})
         }
         )
       }
+    navigate('/')
     }
 
   }, [auth])
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      console.log('hiy')
-
-      navigate('/');
-    }
-  }, [isLoggedIn])
-
-
-  console.log('loggedin', isLoggedIn);
 
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
-        {getRoutes(routes)}
+        {/*  */}
+       {getRoutes(routes)}
         <Route path="/login" element={<Navigate to="/authentication/sign-in" />} />
         <Route path="/*" element={<Navigate to='/authentication/error/404' />} />
         {/* public routes */}

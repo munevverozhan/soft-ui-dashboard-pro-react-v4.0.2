@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useRef, useState, useEffect } from "react";
 
 // react-router-dom components
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import axios from "api/axios";
 
@@ -31,17 +31,16 @@ import CoverLayout from "authentication/components/CoverLayout";
 
 // Images
 import curved11 from "assets/images/curved-images/curved11.jpg";
+import useAuth from "hooks/useAuth";
 
 const REGISTER_URL = '/register';
 
 function Cover() {
   const userRef = useRef();
   const errRef = useRef();
+  const {auth} = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const from = location.state?.from?.pathname || '/';
 
   const [userName, setUserName] = useState('');
 
@@ -58,6 +57,12 @@ function Cover() {
     userRef.current.focus();
   }, [])
 
+  useEffect(() => {
+    if (auth !== null && auth !== undefined && auth.id > 0) {
+      navigate('/');
+    }
+  }, [auth])
+  
   useEffect(() => {
     console.log(password);
     const match = password === matchPwd;
@@ -99,7 +104,7 @@ function Cover() {
         ?
         <>
           {alert('başarılı bir şekilde kayıt oldunuz !')}
-          {navigate(from, { replace: true })}
+          {navigate('/login')}
         </>
         :
         <>

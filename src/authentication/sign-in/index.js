@@ -35,7 +35,7 @@ import curved9 from "assets/images/curved-images/curved9.jpg";
 const LOGIN_URL = '/login';
 
 function Cover() {
-  const {setAuth, setToken } = useAuth();
+  const {setAuth, setToken,auth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,11 +54,11 @@ function Cover() {
     setErrMsg('');
   }, [userName, password])
 
-  // useEffect(() => {
-  //   if (auth !== null && auth !== undefined && auth.id > 0) {
-  //     navigate('/');
-  //   }
-  // }, [auth])
+  useEffect(() => {
+    if (auth !== null && auth !== undefined && auth.id > 0) {
+      navigate('/');
+    }
+  }, [auth])
 
   console.log(location)
   console.log('local storage : ', localStorage);

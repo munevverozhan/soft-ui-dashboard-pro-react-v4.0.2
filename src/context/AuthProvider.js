@@ -26,6 +26,9 @@ export const AuthProvider = ({ children }) => {
     console.log('***************', auth)
   }, [auth])
 
+  useEffect(() => {
+    console.log('auth provider ,, ');
+  }, [])
   // Memoized value of the authentication context
   const contextValue = useMemo(
     () => ({

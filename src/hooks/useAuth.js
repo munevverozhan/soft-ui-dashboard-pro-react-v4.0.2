@@ -28,8 +28,8 @@ const useAuth = () => {
 
              return true;
             }
-            console.log('user types ', (auth))
-            console.log('şu an burdas');
+        //    console.log('user types ', (auth))
+            console.log('şu an burdasin');
             console.log("yetkiniz yok")
 
             navigate('/unauthorized');

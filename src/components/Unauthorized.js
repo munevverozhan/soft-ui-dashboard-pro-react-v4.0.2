@@ -5,6 +5,7 @@ const Unauthorized = () => {
     const navigate = useNavigate();
 
     const goHome = () => navigate('/');
+    const goLogin=()=>navigate('/login');
 
     return (
         <section>
@@ -15,6 +16,7 @@ const Unauthorized = () => {
                
                 <br/>
                 <SoftButton onClick={goHome}>Go home</SoftButton>
+                <SoftButton onClick={goLogin}>Go login</SoftButton>
 
             </div>
         </section>

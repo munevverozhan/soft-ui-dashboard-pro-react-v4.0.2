@@ -15,9 +15,9 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Card from "@mui/material/Card";
+import AddProduct from "components/AddProduct";
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
-import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard PRO React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -26,22 +26,33 @@ import useAuth from "hooks/useAuth";
 
 // Data
 import dataTableData from "order-list/data/dataTableData";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 
 function OrderList() {
-const {requireAuthorization}=useAuth();
-useEffect(()=>{
-requireAuthorization(['ROLE_CLIENT', 'ROLE_ADMIN']);
-},[]);
+  const { requireAuthorization } = useAuth();
+  const [show, setShow] = useState(false);
+  function toggleShow() {
+    setShow(!show);
+  };
+  useEffect(() => {
+    requireAuthorization(['ROLE_CLIENT', 'ROLE_ADMIN']);
+  }, []);
+
+  const newProduct = (name)=>{
+    toggleShow()
+  }
+
 
   return (
     <DashboardLayout>
       <SoftBox my={3}>
         <SoftBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
-          <SoftButton variant="gradient" color="info">
-            new order
-          </SoftButton>
-
+          <AddProduct
+            toggleShow={toggleShow}
+            show={show}
+            newProduct={newProduct}
+          />
         </SoftBox>
         <Card>
           <DataTable table={dataTableData} />
@@ -52,3 +63,4 @@ requireAuthorization(['ROLE_CLIENT', 'ROLE_ADMIN']);
 }
 
 export default OrderList;
+

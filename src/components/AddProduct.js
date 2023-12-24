@@ -40,8 +40,7 @@ const AddProduct = (props) => {
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 setName('');
-                                setIndustry('');
-                                props.newProduct(industry);
+                                props.newProduct(name);
                             }}
                             id="editmodal"
                         >

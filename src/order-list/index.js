@@ -23,6 +23,7 @@ import SoftBox from "components/SoftBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DataTable from "examples/Tables/DataTable";
 import useAuth from "hooks/useAuth";
+import useAxios from "hooks/useAxios";
 
 // Data
 import dataTableData from "order-list/data/dataTableData";
@@ -32,17 +33,37 @@ import { useEffect, useState } from "react";
 function OrderList() {
   const { requireAuthorization } = useAuth();
   const [show, setShow] = useState(false);
-  function toggleShow() {
+  const url = '/products';
+
+  const toggleShow = () => {
     setShow(!show);
   };
+
   useEffect(() => {
     requireAuthorization(['ROLE_CLIENT', 'ROLE_ADMIN']);
   }, []);
 
-  const newProduct = (name)=>{
-    toggleShow()
-  }
+  const { request,
+    appendData,
+    data: { products } = {},
+    errorStatus
+  } = useAxios(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer' + localStorage.getItem('token'),
+    },
+  });
 
+  useEffect(() => {
+    request();
+  }, []);
+
+  const newProduct = (name) => {
+    appendData({ name: name });
+    if (!errorStatus) {
+      toggleShow()
+    }
+  }
 
   return (
     <DashboardLayout>

@@ -18,9 +18,10 @@ Coded by www.creative-tim.com
 import IdCell from "order-list/components/IdCell";
 import DefaultCell from "order-list/components/DefaultCell";
 
-const dataTableData = {
+const dataTableData ={
+
   columns: [
-    { Header: "id", accessor: "id", Cell: ({ value }) => <IdCell id={value} /> },
+   { Header: "id", accessor: "id", Cell: ({ value }) => <IdCell id={value} /> },
 
     {
       Header: "product",
@@ -29,55 +30,11 @@ const dataTableData = {
     }
   ],
 
-  rows: [
+  rows: [   
     {
-      id: "#10421",
+      id:'',
       product: "Nike Sport V2",
-    },
-    {
-      id: "#10422",
-      product: "Valvet T-shirt",
-    },
-    {
-      id: "#10423",
-      product: "Leather Wallet",
-    },
-    {
-      id: "#10424",
-      product: "Bracelet Onu-Lino",
-    },
-    {
-      id: "#10425",
-      product: "Phone Case Pink",
-    },
-    {
-      id: "#10426",
-      product: "Backpack Niver",
-    },
-    {
-      id: "#10427",
-      product: "Adidas Vio",
-    },
-    {
-      id: "#10428",
-      product: "Airpods 2 Gen",
-    },
-    {
-      id: "#10429",
-      product: "Bracelet Warret",
-    },
-    {
-      id: "#10430",
-      product: "Watter Bottle India",
-    },
-    {
-      id: "#10431",
-      product: "Kitchen Gadgets",
-    },
-    {
-      id: "#10432",
-      product: "Office Papers",
-    },
+    }
   ],
 };
 

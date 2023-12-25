@@ -14,26 +14,28 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Card from "@mui/material/Card";
+//import Card from "@mui/material/Card";
 import AddProduct from "components/AddProduct";
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
+import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DataTable from "examples/Tables/DataTable";
+//import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+//import DataTable from "examples/Tables/DataTable";
 import useAuth from "hooks/useAuth";
 import useAxios from "hooks/useAxios";
 
 // Data
-import dataTableData from "order-list/data/dataTableData";
+//import dataTableData from "order-list/data/dataTableData";
 
 import { useEffect, useState } from "react";
 
 function OrderList() {
   const { requireAuthorization } = useAuth();
   const [show, setShow] = useState(false);
-  const url = '/products';
+  const [product,setProduct]=useState([{}]);
+  const url = 'http://localhost:8080/acquisitions/listProducts';
 
   const toggleShow = () => {
     setShow(!show);
@@ -41,45 +43,75 @@ function OrderList() {
 
   useEffect(() => {
     requireAuthorization(['ROLE_CLIENT', 'ROLE_ADMIN']);
+    request(url, 'get', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    }).then((data) =>setProduct(data.data));
+   // console.log('order-list data ',data.data);
+  //  console.log('order-list data ',data)
+    
   }, []);
 
   const { request,
     appendData,
-    data: { products } = {},
-    errorStatus
-  } = useAxios(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer' + localStorage.getItem('token'),
-    },
-  });
-
-  useEffect(() => {
-    request();
-  }, []);
+  } = useAxios();
 
   const newProduct = (name) => {
-    appendData({ name: name });
+    appendData({ productName: name });
     if (!errorStatus) {
       toggleShow()
     }
   }
+  console.log('111111111111111111111')
+  console.log('product order-list : ',product);
 
   return (
-    <DashboardLayout>
-      <SoftBox my={3}>
+    // <DashboardLayout>
+    //   <SoftBox my={3}>
+    //     <SoftBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
+    //       <AddProduct
+    //         toggleShow={toggleShow}
+    //         show={show}
+    //         newProduct={newProduct}
+    //       />
+    //     </SoftBox>
+    //     <Card>
+    //       <DataTable table={dataTableData} />
+    //     </Card>
+    //   </SoftBox>
+    // </DashboardLayout>
+    <div>
+      <div >
+        <h1>products</h1>
         <SoftBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
-          <AddProduct
-            toggleShow={toggleShow}
-            show={show}
-            newProduct={newProduct}
-          />
-        </SoftBox>
-        <Card>
-          <DataTable table={dataTableData} />
-        </Card>
-      </SoftBox>
-    </DashboardLayout>
+              <AddProduct
+                toggleShow={toggleShow}
+                show={show}
+                newProduct={newProduct}
+              />
+            </SoftBox>
+        <ul >
+
+          <li>
+            
+
+            {
+              product ? product.map((item) => {
+                return (
+                  <li key={item.id}>
+                    <h1 ><b>{item.productName}</b></h1>
+                    <SoftButton variant="contained" color="success" >Edit</SoftButton>
+                    <SoftButton variant='contained' color='error'>Delete</SoftButton>
+                  </li>
+                )
+              })
+                : <h3>veri gelmedi</h3>}
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 }
 

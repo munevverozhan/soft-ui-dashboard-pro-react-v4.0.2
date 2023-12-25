@@ -46,7 +46,7 @@ const AddProduct = (props) => {
                         >
                             <div>
                                 <div>
-                                    <label for='name'>
+                                    <label htmlFor='name'>
                                         name
                                     </label>
                                 </div>

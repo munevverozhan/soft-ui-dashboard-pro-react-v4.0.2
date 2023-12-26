@@ -18,26 +18,36 @@ import Card from "@mui/material/Card";
 import AddProduct from "components/AddProduct";
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
-import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard PRO React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 //import DataTable from "examples/Tables/DataTable";
 import useAuth from "hooks/useAuth";
 import useAxios from "hooks/useAxios";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit'
 
 // Data
 //import dataTableData from "order-list/data/dataTableData";
 
 import { useEffect, useState } from "react";
 import { DataGrid } from '@mui/x-data-grid';
+import Button from '@mui/material/Button';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { blue, green, red } from "@mui/material/colors";
 
+const theme = createTheme({
+  palette: {
+    primary: blue,
+    error: red,
+    success: green
+  }
+})
 
 function OrderList() {
   const { requireAuthorization } = useAuth();
   const [show, setShow] = useState(false);
-  const [product, setProduct] = useState([{}]);
-  const [rows, setRows] = useState(rows);
+  const [product, setProduct] = useState([]);
   const url = 'http://localhost:8080/acquisitions/listProducts';
 
   const toggleShow = () => {
@@ -64,28 +74,45 @@ function OrderList() {
   const newProduct = (name) => {
     appendData({ productName: name });
     if (!errorStatus) {
-      toggleShow()
+      toggleShow();
     }
   }
 
-  useEffect(() => {
-    if (product) {
-      product.map((item) => {
-      
-        console.log('id: ', getRowId);
-        console.log('name: ', productName);
 
-      });
-    }
-  }, [product])
   console.log('111111111111111111111')
   console.log('product order-list : ', product);
 
   const columns = [
-    { field:'id' ,headerName: 'ID', width: 70 },
-    { field: 'productName',headerName: 'Product name', width: 130 },
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'productName', headerName: 'Product name', width: 700 },
+    // {
+    //   field: 'actions', type: 'actions', width: 150, getActions: (params) => [
+    //     <GridActionsCellItem icon={<DeleteIcon />} label="delete" />,
+    //     <GridActionsCellItem icon={<EditIcon />} label="edit" />
+    //   ]
+    // },
+    {
+      field: 'actions', type: 'actions', width: 200, getActions: () => [
+        // <GridActionsCellItem icon={<DeleteIcon />} label="delete" />
+        // <Button variant="contained" startIcon={<DeleteIcon/>}>Delete</Button>
+        
+        <ThemeProvider theme={theme}>
+          <Button variant="contained" color="success" startIcon={<EditIcon />} >Edit</Button>
+          <Button variant="contained" color="error" startIcon={<DeleteIcon />} >Delete</Button>
+        </ThemeProvider>
+        
+      ]
+    }
+
   ];
 
+  const onEdit = (row) => {
+    // Edit işlemini gerçekleştirin
+  };
+
+  const onDelete = (row) => {
+    // Delete işlemini gerçekleştirin
+  };
   return (
     <DashboardLayout>
       <SoftBox my={3}>
@@ -97,10 +124,10 @@ function OrderList() {
           />
         </SoftBox>
         <Card>
-          <DataGrid rows={rows} columns={columns} checkboxSelection />
+          <DataGrid rows={product} columns={columns} initialState={{ pagination: { paginationModel: { pageSize: 15 } } }} pageSizeOptions={[15]} checkboxSelection />
         </Card>
       </SoftBox>
-    </DashboardLayout>
+    </DashboardLayout >
 
 
     /* { <div>
@@ -114,7 +141,7 @@ function OrderList() {
                />
              </SoftBox>
          <ul >
- 
+   
            <li>
              {
                product ? product.map((item) => {
